@@ -5,4 +5,4 @@ Created on Tue Apr 29 16:55:07 2014
 @author: akshay
 """
 
-Algorithms in python.
+Many important Algorithms and Data Structures in python.
