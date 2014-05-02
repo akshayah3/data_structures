@@ -21,10 +21,7 @@ def compute_value(q):
         a = (10**((z/2)))*l
         b = int(q[z/2:])
         return a, b, l
-    """else:
-        a = 10**((z + 1)/2)*int(q[0:(z - 1)/2])
-        b = int(q[(z - 1)/2:])
-        return a, b"""       
+
 def karatsuba(x, y):
         a,b,k = compute_value(x)
         c,d,f = compute_value(y)
@@ -39,5 +36,5 @@ x = raw_input('enter the first number')
 y = raw_input('enter the second number')
 print compute_value(x)
 print compute_value(y)
-akshay = karatsuba(x, y)
-print akshay
+a = karatsuba(x, y)
+print a
