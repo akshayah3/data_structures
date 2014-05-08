@@ -1,40 +1,25 @@
-# -*- coding: utf-8 -*-
+def karatsuba(x, y, b=10):
+    """ returns product of x, y. Uses base b
+in karatsuba algorithm
+Gives running time of O(n^1.585) as opposed to
+O(n^2) of naive multiplication
+>>> karatsuba(1234223123412323, 1234534213423333123)
+1523690672850721578619752112274729L
 """
-Created on Tue Apr 29 16:01:54 2014
+    nx, ny = len(str(x))/2, len(str(y))/2
+    if x < 1000 or y < 1000: return x * y
+    m = nx if nx < ny else ny
+    x1 = x / (b**m)
+    x0 = x % (x1 * (b**m))
+    y1 = y / (b**m)
+    y0 = y % (y1 * (b**m))
+    z1 = karatsuba(x1,y1,b)
+    z3 = karatsuba(x0,y0,b)
+    z2 = karatsuba(x1 + x0, y1 + y0, b) - z1 - z3
+    return (b**(2*m))*z1 + (b**m)*z2 + z3
 
-@author: akshay
-"""
-
-"""
-Karatsuba Multiplication
-"""
-def check_even(q):
-    if len(q)%2 == 0:
-        return True
-    else:
-        return False
-
-def compute_value(q): 
-    z = len(q)
-    if check_even(q):
-        l = int(q[0:(z)/2])
-        a = (10**((z/2)))*l
-        b = int(q[z/2:])
-        return a, b, l
-
-def karatsuba(x, y):
-        a,b,k = compute_value(x)
-        c,d,f = compute_value(y)
-        if check_even(x) and check_even(y):
-            return 10**len(x)*a*b + 10**(len(x)/2)*(a*d + b*c) + b*d
-            
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
 
 
-
-        
-x = raw_input('enter the first number')
-y = raw_input('enter the second number')
-print compute_value(x)
-print compute_value(y)
-a = karatsuba(x, y)
-print a
